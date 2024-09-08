@@ -35,14 +35,26 @@
               <div class="chat-details">
                   <img src="images/user.png" alt="download">
                   <div class="typing-animation">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
+                    <div class="typing-dot" style="--delay: 0.2s"></div>
+                    <div class="typing-dot" style="--delay: 0.3s"></div>
+                    <div class="typing-dot" style="--delay: 0.4s"></div>
                   </div>
                 </div>
               <span class="material-symbols-outlined">content_copy</span>
             </div>  
           </div>
     </div>
+  <!-- Typing container -->
+  <div class="typing-container">
+    <div class="typing-content">
+      <div class="typing-textarea">
+        <textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required></textarea>
+        <span id="send-btn" class="material-symbols-rounded">send</span>
+      </div>
+      <div class="typing-controls">
+        <span id="theme-btn" class="material-symbols-outlined">light_mode</span>
+        <span id="delete-btn" class="material-symbols-outlined">delete</span>
+    </div>
+  </div>
 </body>
 </html>
