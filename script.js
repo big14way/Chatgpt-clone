@@ -1,9 +1,16 @@
 const chatInput = document.querySelector("#chat-input");
 const sendButton = document.querySelector("#send-btn");
 const chatContainer = document.querySelector(".chat-container");
+const lightToggler = document.querySelector('#theme-btn')
+const darkToggler = document.querySelector('#dark-btn')
 
 
 let userText = null;
+
+lightToggler.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode')
+  lightToggler.innerHTML = document.body.classList.contains('light-mode') ? 'dark_mode' : 'light_mode'
+})
 
 const createElement = (html, className) => {
     //create new div and apply chat, specified class and set html content of div
@@ -27,3 +34,5 @@ const handleOutgoingChat = () => {
 }
 
 sendButton.addEventListener("click", handleOutgoingChat); 
+
+
