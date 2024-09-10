@@ -204,7 +204,8 @@
     color: #e55865;
   }
   .chat .typing-animation {
-    padding-left: 25px;
+    position: absolute;
+    left: 10%;
     display: none;
   }
   .chat.loading .typing-animation {
@@ -313,7 +314,7 @@
   }
 
 
-  
+
   
   /* Reponsive Media Query */
   @media screen and (max-width: 600px) {
