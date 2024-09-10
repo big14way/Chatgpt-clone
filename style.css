@@ -235,7 +235,9 @@
     }
   }
   
-  /* Typing container styling */
+
+
+
   .typing-container {
     position: fixed;
     bottom: 0;
@@ -309,6 +311,9 @@
   .typing-controls span:hover {
     background: var(--icon-hover-bg);
   }
+
+
+  
   
   /* Reponsive Media Query */
   @media screen and (max-width: 600px) {

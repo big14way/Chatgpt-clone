@@ -14,22 +14,21 @@ lightToggler.addEventListener('click', () => {
 })
 
 const createElement = (html, ...classes) => {
-    //create new div and apply chat, specified class and set html content of div
     const chatDiv = document.createElement("div");
     chatDiv.classList.add("chat", ...classes);
     chatDiv.innerHTML = html;
-    return chatDiv; //Return the created chat div
+    return chatDiv; 
 }
 
 const handleOutgoingChat = () => {
-    userText = chatInput.value.trim(); //get chatInput value and remove extra spaces
+    userText = chatInput.value.trim(); 
     const html = `<div class="chat-content">
-                   <div class="chat-details">
-                     <img src="images/download.png" alt="download">
-                    <p class="text"></p>
-                  </div>
-                </div>`;
-   //create an outgoing chat div with user's message and append it to chat container             
+                            <div class="chat-details">
+                              <img src="images/download.png" alt="download">
+                              <p class="text"></p>
+                            </div>
+                          </div>`;
+            
   const outgoingChatDiv = createElement(html, "outgoing");
   outgoingChatDiv.querySelector('.text').innerText = userText
   chatContainer.appendChild(outgoingChatDiv);
@@ -52,7 +51,8 @@ const showLoadingAnime = () => {
           </div>
           <span class="material-symbols-outlined">content_copy</span>
         </div>  `;
-//create an outgoing chat div with user's message and append it to chat container             
+
+        
 const incomingMessageDiv = createElement(html, "incoming", "loading");
 chatContainer.appendChild(incomingMessageDiv);
 
@@ -75,10 +75,8 @@ const generateAPIResponse = async (incomingMessageDiv) => {
       })
     }); 
     const data = await response.json();
-    console.log(data)
     
     const apiResponse = data?.candidates[0].content.parts[0].text;
-    console.log(apiResponse)
     textElement.innerText = apiResponse
 
   } catch (error) {
