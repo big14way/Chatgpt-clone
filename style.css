@@ -61,17 +61,21 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    display: grid;
+    display: none;
   }
   .header :where(.title, .subtitle) {
     font-weight: 500;
     line-height: 3.6rem;
   }
   .header .title {
-    font-size: 2.7rem;
+    font-size: 4.7rem;
     width: fit-content;
     background-clip: text;
-    background: linear-gradient(to right, #4385f4, #d06570);
+    background: linear-gradient(to right, 
+    #00fff2 0%,
+    #19cfcfa5 14.29%, 
+    #1eff005d 64.29%,
+    #aeff00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -118,7 +122,7 @@
   }
 
   .main {
-    display: none;
+    display: grid;
   }
 
   .default-text {
@@ -201,6 +205,9 @@
   }
   .chat .typing-animation {
     padding-left: 25px;
+    display: none;
+  }
+  .chat.loading .typing-animation {
     display: inline-flex;
   }
   .typing-animation .typing-dot {
@@ -263,7 +270,7 @@
     max-height: 250px;
     overflow-y: auto;
     background: var(--incoming-chat-bg);
-    border: 1px solid var(--incoming-chat-border);
+    outline: 1px solid var(--incoming-chat-border);
     transition: var(--transition);
   }
   .typing-textarea textarea::placeholder {
@@ -287,6 +294,7 @@
   }
   .typing-textarea textarea:valid ~ span {
     visibility: visible;
+    cursor: pointer;
   }
   .typing-controls {
     display: flex;
@@ -297,9 +305,6 @@
     background: var(--incoming-chat-bg);
     outline: 1px solid var(--incoming-chat-border);
     cursor: pointer;
-  }
-  .typing-controls #dark-btn {
-    display: none;
   }
   .typing-controls span:hover {
     background: var(--icon-hover-bg);
