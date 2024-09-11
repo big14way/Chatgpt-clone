@@ -20,7 +20,7 @@ const loadLocalStorageData = () => {
   chatContainer.innerHTML = savedChats || "";
 
 }
-// loadLocalStorageData()
+loadLocalStorageData()
 
 
 
@@ -141,11 +141,11 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
 deleteButton.addEventListener("click", () => {
   //Remove the chats from local storage and call ladDataFromlocalsyorage function
   if(confirm("Are you sure you wwant to delete all the chats?")) {
-    localStorage.removeItem("all-chats");
-    loadDataFromLocalstorage();
+    localStorage.removeItem("savedChats");
+    loadLocalStorageData();
   }
 })
-
+// loadLocalStorageData
 
 sendButton.addEventListener("click", handleOutgoingChat); 
 
