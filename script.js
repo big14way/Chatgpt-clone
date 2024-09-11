@@ -8,14 +8,31 @@ let userText = null;
 const API_KEY = "AIzaSyDDuFUzuJ4xkVRiAuEqzKtlOsPOsZTxmT4"
 const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`
 
+const loadLocalStorageData = () => {
+  const lightMode = (localStorage.getItem('themeColor') === 'light_mode');
+  const savedChats = localStorage.getItem('savedChats')
+
+  document.body.classList.toggle('light-mode', lightMode);
+  lightToggler.innerText = lightMode ? 'dark_mode' : 'light_mode'
+
+  chatContainer.innerHTML = savedChats || "";
+
+}
+// loadLocalStorageData()
+
+
+
 lightToggler.addEventListener('click', () => {
   document.body.classList.toggle('light-mode')
+
+  localStorage.setItem('themeColor', document.body.classList.contains('light-mode') ? 'light_mode' : 'dark_mode')
+
   lightToggler.innerHTML = document.body.classList.contains('light-mode') ? 'dark_mode' : 'light_mode'
 })
 
 const createElement = (html, ...classes) => {
     const chatDiv = document.createElement("div");
-    chatDiv.classList.add("chat", ...classes);
+    chatDiv.classList.add("chat", ...classes); 
     chatDiv.innerHTML = html;
     return chatDiv; 
 }
@@ -37,6 +54,16 @@ const handleOutgoingChat = () => {
   setTimeout(showLoadingAnime, 500)
 }
 
+
+// const copyMessage = (copyIcon) => {
+//   const messageText = copyIcon.parentElement.querySelector('.text').innerText
+
+//   navigator.clipboard.writeText(messageText);
+//   copyIcon.innerText = 'done';
+//   setTimeout(() => copyIcon.innerText = 'content_copy', 1000);
+// }
+
+
 const showLoadingAnime = () => {
   const html = `          
         <div class="chat-content">
@@ -49,8 +76,9 @@ const showLoadingAnime = () => {
               <div class="typing-dot" style="--delay: 0.4s"></div>
             </div>
           </div>
-          <span class="material-symbols-outlined">content_copy</span>
+          <span class="copied material-symbols-outlined" onclick="copyMessage(this) ">content_copy</span>
         </div>  `;
+
 
         
 const incomingMessageDiv = createElement(html, "incoming", "loading");
@@ -76,8 +104,12 @@ const generateAPIResponse = async (incomingMessageDiv) => {
     }); 
     const data = await response.json();
     
-    const apiResponse = data?.candidates[0].content.parts[0].text;
-    textElement.innerText = apiResponse
+    const apiResponse = data?.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*/g, '$1');
+    // textElement.innerText = apiResponse
+
+
+
+    showTypingEffect(apiResponse, textElement, incomingMessageDiv)
 
   } catch (error) {
     console.log(error)
@@ -85,6 +117,23 @@ const generateAPIResponse = async (incomingMessageDiv) => {
     incomingMessageDiv.classList.remove('loading');
   }
   
+}
+
+const showTypingEffect = (text, textElement, incomingMessageDiv) => {
+  const words = text.split(' ')
+  let currentWordIndex = 0;
+
+  const typingInterval = setInterval(() => {
+    textElement.innerText += (currentWordIndex === 0 ? '' : ' ') + words[currentWordIndex++];
+    incomingMessageDiv.querySelector('.icon') .classList.add('hide')
+
+
+    if (currentWordIndex === words.length) {
+      clearInterval(typingInterval)
+      incomingMessageDiv.querySelector('.icon') .classList.remove('hide')
+      localStorage.setItem('savedChats', chatContainer.innerHTML)
+    }
+  }, 75);
 }
 
 

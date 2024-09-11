@@ -181,6 +181,9 @@
   .chat:hover .chat-content:not(:has(.typing-animation), :has(.error)) span {
     visibility: visible;
   }
+  .chat:hover .copied {
+    visibility: visible;
+  }
   .chat .chat-details {
     display: flex;
     align-items: center;
