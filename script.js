@@ -2,6 +2,8 @@ const chatInput = document.querySelector("#chat-input");
 const sendButton = document.querySelector("#send-btn");
 const chatContainer = document.querySelector(".chat-container");
 const lightToggler = document.querySelector('#theme-btn')
+const deleteButton = document.querySelector('#delete-btn');
+
 
 
 let userText = null;
@@ -135,6 +137,14 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
     }
   }, 75);
 }
+
+deleteButton.addEventListener("click", () => {
+  //Remove the chats from local storage and call ladDataFromlocalsyorage function
+  if(confirm("Are you sure you wwant to delete all the chats?")) {
+    localStorage.removeItem("all-chats");
+    loadDataFromLocalstorage();
+  }
+})
 
 
 sendButton.addEventListener("click", handleOutgoingChat); 
