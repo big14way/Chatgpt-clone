@@ -127,12 +127,12 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
 
   const typingInterval = setInterval(() => {
     textElement.innerText += (currentWordIndex === 0 ? '' : ' ') + words[currentWordIndex++];
-    incomingMessageDiv.querySelector('.icon') .classList.add('hide')
+    // incomingMessageDiv.querySelector('.icon') .classList.add('hide')
 
 
     if (currentWordIndex === words.length) {
       clearInterval(typingInterval)
-      incomingMessageDiv.querySelector('.icon') .classList.remove('hide')
+      // incomingMessageDiv.querySelector('.icon') .classList.remove('hide')
       localStorage.setItem('savedChats', chatContainer.innerHTML)
     }
   }, 75);

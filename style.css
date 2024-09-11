@@ -123,6 +123,7 @@
 
   .main {
     display: grid;
+    scrollbar-color: #999 transparent;
   }
 
   .default-text {
@@ -172,6 +173,7 @@
     user-select: none;
     cursor: pointer;
   }
+
   .chat .chat-content span {
     cursor: pointer;
     font-size: 1.3rem;
@@ -181,9 +183,10 @@
   .chat:hover .chat-content:not(:has(.typing-animation), :has(.error)) span {
     visibility: visible;
   }
-  .chat:hover .copied {
+  .chat:hover .copied:not(.hide) {
     visibility: visible;
   }
+
   .chat .chat-details {
     display: flex;
     align-items: center;
