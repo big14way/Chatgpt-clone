@@ -347,6 +347,10 @@
     .chat-container .chat p {
       padding: 0 20px;
     }
+    .chat .typing-animation {
+      margin-left: -30px;
+      display: none;
+    }
     .chat .chat-content:not(:has(.typing-animation), :has(.error)) span {
       visibility: visible;
     }
