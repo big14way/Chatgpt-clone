@@ -55,7 +55,7 @@ const handleOutgoingChat = () => {
 
     const html = `<div class="chat-content">
                             <div class="chat-details">
-                              <img src="images/download.png" alt="download">
+                              <img src="images/3d cartoon wallpapers hd 3d cartoon wallpapers hd angry birds.jpg" alt="download">
                               <p class="text"></p>
                             </div>
                           </div>`;
