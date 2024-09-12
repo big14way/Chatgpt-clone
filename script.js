@@ -19,6 +19,14 @@ const loadLocalStorageData = () => {
 
   chatContainer.innerHTML = savedChats || "";
 
+  const defaultText = `<div class="default-text">
+                          <h1>ChatGPT Clone</h1>
+                          <p>Start a conversation and explore the power of AI.<br> Your chat history will be displayed here.</p>
+                      </div>`
+
+  chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
+  chatContainer.scrollTo(0, chatContainer.scrollHeight);                    
+
 }
 loadLocalStorageData()
 
@@ -49,7 +57,8 @@ const handleOutgoingChat = () => {
                           </div>`;
             
   const outgoingChatDiv = createElement(html, "outgoing");
-  outgoingChatDiv.querySelector('.text').innerText = userText
+  outgoingChatDiv.querySelector('.text').innerText = userText;
+  document.querySelector(".default-text")?.remove();
   chatContainer.appendChild(outgoingChatDiv);
 
   chatInput.value = '';
@@ -139,7 +148,7 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
 }
 
 deleteButton.addEventListener("click", () => {
-  //Remove the chats from local storage and call ladDataFromlocalsyorage function
+  //Remove the chats from local storage and call loadDataFromlocalsyorage function
   if(confirm("Are you sure you wwant to delete all the chats?")) {
     localStorage.removeItem("savedChats");
     loadLocalStorageData();
