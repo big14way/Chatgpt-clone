@@ -39,6 +39,8 @@
     max-height: 100vh;
     padding-bottom: 150px;
     transition: all 500ms ease;
+    /* display: none; */
+    scrollbar-color: #999 transparent;
   }
   :where(.chat-container, textarea)::-webkit-scrollbar {
     width: 6px;
@@ -61,8 +63,13 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    display: none;
   }
+
+  body.hide-header .header {
+    display: none;
+    margin-top: 0;
+  }
+
   .header :where(.title, .subtitle) {
     font-weight: 500;
     line-height: 3.6rem;
@@ -121,11 +128,6 @@
     background-color: var(--outgoing-chat-border);
   }
 
-  .main {
-    display: grid;
-    scrollbar-color: #999 transparent;
-  }
-
   .default-text {
     display: flex;
     align-items: center;
@@ -180,7 +182,7 @@
     color: var(--icon-color);
     visibility: hidden;
   }
-  .chat:hover .chat-content:not(:has(.typing-animation), :has(.error)) span {
+  .chat:hover .chat-content:not(:has(.typing-animation), :has(.error)) span:not(.hide) {
     visibility: visible;
   }
   .chat:hover .copied:not(.hide) {
@@ -188,7 +190,7 @@
   }
 
   .chat .chat-details {
-    display: flex;
+    display: flex;         
     align-items: center;
   }
   .chat .chat-details img {
@@ -210,8 +212,7 @@
     color: #e55865;
   }
   .chat .typing-animation {
-    position: absolute;
-    left: 10%;
+    margin-left: -50px;
     display: none;
   }
   .chat.loading .typing-animation {
