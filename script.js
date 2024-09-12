@@ -57,13 +57,40 @@ const handleOutgoingChat = () => {
 }
 
 
-// const copyMessage = (copyIcon) => {
-//   const messageText = copyIcon.parentElement.querySelector('.text').innerText
+const copyMessage = (copyIcon) => {
+  try {
+    const messageText = copyIcon.closest('.chat-content').querySelector('.text').innerText;
 
-//   navigator.clipboard.writeText(messageText);
-//   copyIcon.innerText = 'done';
-//   setTimeout(() => copyIcon.innerText = 'content_copy', 1000);
-// }
+    navigator.clipboard.writeText(messageText).then(() => {
+      showNotification('Copied to clipboard!', copyIcon); 
+
+      setTimeout(() => copyIcon.innerText = 'content_copy', 1000);
+    }).catch(err => {
+      console.error('Error copying text: ', err);
+      showNotification('Failed to copy text.', copyIcon);
+    });
+  } catch (err) {
+    console.error('Error in copyMessage function: ', err);
+  }
+};
+
+const showNotification = (message, copyIcon) => {
+  const notification = document.createElement('div');
+  notification.innerText = message;
+  notification.classList.add('copy-notification');
+
+  const iconRect = copyIcon.getBoundingClientRect();
+  notification.style.position = 'absolute';
+  notification.style.left = `${iconRect.left}px`;
+  notification.style.top = `${iconRect.top - 30}px`; 
+
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.remove();
+  }, 1000);
+};
+
 
 
 const showLoadingAnime = () => {
